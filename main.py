@@ -92,5 +92,23 @@ def direnctoplam(R1,R2,R3):
   elif Circuit_State == 3:
     rtoplam = (R1+R2+R3)
   else: rtoplam = ""
+		
+		
+def textbox():
+    global game_paused,menu_state,r1,r2,r3,Circuit_State,volt,devre_img
+    screen = pg.display.set_mode((1200, 750))
+    font2 = pg.font.SysFont("arialblack", 25)
+    clock = pg.time.Clock()
+    input_box = pg.Rect(500, 250, 140, 50)
+    color_inactive = pg.Color('lightskyblue3')
+    color_active = pg.Color('dodgerblue2')
+    color = color_inactive
+    active = False
+    text = ''
+    done = False
+    yazı = ""
+    yazı2 = "Voltaj değerini giriniz"
+    font_hata = pg.Color("Red")
+    text_box_state = int(6)
   
 
