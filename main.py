@@ -72,6 +72,8 @@ class Button():
 		surface.blit(self.image, (self.rect.x, self.rect.y))
 
 		return action 
-  
+resume_img = pg.image.load("button_resume.png").convert_alpha()
+options_img = pg.image.load("button_options.png").convert_alpha()
+quit_img = pg.image.load("button_quit.png").convert_alpha()
   
 
