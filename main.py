@@ -76,7 +76,7 @@ resume_img = pg.image.load("button_resume.png").convert_alpha()
 options_img = pg.image.load("button_options.png").convert_alpha()
 quit_img = pg.image.load("button_quit.png").convert_alpha()
   
-#create button instances
+#Buton
 resume_button = Button(500, 125, resume_img, 1)
 options_button = Button(500, 250, options_img, 1)
 quit_button = Button(500, 375, quit_img, 1)
@@ -93,8 +93,9 @@ def direnctoplam(R1,R2,R3):
     rtoplam = (R1+R2+R3)
   else: rtoplam = ""
 		
-		
+#Yazı kutularının yapılması		
 def textbox():
+	
     global game_paused,menu_state,r1,r2,r3,Circuit_State,volt,devre_img
     screen = pg.display.set_mode((1200, 750))
     font2 = pg.font.SysFont("arialblack", 25)
@@ -110,5 +111,21 @@ def textbox():
     yazı2 = "Voltaj değerini giriniz"
     font_hata = pg.Color("Red")
     text_box_state = int(6)
-  
+
+
+   def text_ayarlar(text, font, text_col, x, y):
+        img = font.render(text, True, text_col)
+        screen.blit(img, (x, y))
+    while not done:
+        for event in pg.event.get():
+            if event.type == pg.MOUSEBUTTONDOWN:
+                # If the user clicked on the input_box rect.
+                if input_box.collidepoint(event.pos):
+                    # Toggle the active variable.
+                    active = not active
+                else:
+                    active = False
+                # Change the current color of the input box.
+                color = color_active if active else color_inactive
+            if event.type == pg.KEYDOWN:
 
