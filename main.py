@@ -76,5 +76,21 @@ resume_img = pg.image.load("button_resume.png").convert_alpha()
 options_img = pg.image.load("button_options.png").convert_alpha()
 quit_img = pg.image.load("button_quit.png").convert_alpha()
   
+#create button instances
+resume_button = Button(500, 125, resume_img, 1)
+options_button = Button(500, 250, options_img, 1)
+quit_button = Button(500, 375, quit_img, 1)
+def draw_text(text, font, text_col, x, y):
+  img = font.render(text, True, text_col)
+  screen.blit(img, (x, y))
+def direnctoplam(R1,R2,R3):
+  global Circuit_State,rtoplam 
+  if Circuit_State == 1:
+    rtoplam = round(R1+(1/R2)+(1/R3),2)
+  elif Circuit_State == 2:
+    rtoplam = round((1/R1)+(1/R2)+(1/R3),2)
+  elif Circuit_State == 3:
+    rtoplam = (R1+R2+R3)
+  else: rtoplam = ""
   
 
