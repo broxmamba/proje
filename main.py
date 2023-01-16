@@ -164,3 +164,24 @@ def textbox():
                           else:
                             yazı = "1-2-3 değerlerinden birini girin"
                             text_box_state = 2	
+			if text_box_state == 0:
+                          
+                          game_paused= True
+                          done = True
+                          menu_state = "main"
+                          text_box_state = 4
+                          if Circuit_State == 1:
+                            devre_img = devre_img1
+                          elif Circuit_State == 2:
+                            devre_img = devre_img2
+                          elif Circuit_State == 3:
+                            devre_img = devre_img3
+                        break
+                      except:
+                        yazı = "Lütfen sadece sayı giriniz"
+                         
+                        
+                    elif event.key == pg.K_BACKSPACE:
+                        text = text[:-1]
+                    else:
+                          text += event.unicode	
