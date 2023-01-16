@@ -45,16 +45,16 @@ def dikdörtgen(genislik,yukseklik,x,y): #Dikdörtgen oluşturur
   
   screen.blit(dikdörtgen_nesnesi, dikdörtgen_nesnesi_konumu)
   
-#BUTONUN YÜKLENMESİ
 class Button():
-  def __init__(self, x, y, image, oran):
-	  width = image.get_width()
+	def __init__(self, x, y, image, oran):
+		width = image.get_width()
 		height = image.get_height()
 		self.image = pg.transform.scale(image, (int(width * oran), int(height * oran)))
 		self.rect = self.image.get_rect()
 		self.rect.topleft = (x, y)
-		self.clicked = False  
-  def draw(self, surface):
+		self.clicked = False
+
+	def draw(self, surface):
 		action = False
 		#get mouse position
 		pos = pg.mouse.get_pos()
@@ -128,4 +128,28 @@ def textbox():
                 # Change the current color of the input box.
                 color = color_active if active else color_inactive
             if event.type == pg.KEYDOWN:
-
+                if active:
+                    if event.key == pg.K_RETURN:
+                      try:
+                        sayı = int(text)
+                        text_box_state -= 1
+                        if text_box_state == 5:
+                          yazı2 = "1 Numaralı Direnç (r1)"
+                          volt = sayı
+                          text = ''
+                          print (volt)
+                        elif text_box_state == 4:
+                          yazı2 = "2 Numaralı Direnç (r2)"
+                          r1 = sayı
+                          text = ''
+                          print (r1)
+                        elif text_box_state == 3:
+                          yazı2 = "3 Numaralı Direnç (r3)"
+                          r2 = sayı
+                          text = ''
+                          print (r2)
+                        elif text_box_state == 2:
+                          yazı2 = "Devre Tipi (1- Komplike 2- Paralel 3- Seri)"
+                          r3 = sayı
+                          text =''
+                          print (r3)
