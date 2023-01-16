@@ -153,3 +153,14 @@ def textbox():
                           r3 = sayı
                           text =''
                           print (r3)
+			elif text_box_state == 1:
+                          Circuit_State = sayı
+                          if 0< Circuit_State < 4:
+                            print(Circuit_State)
+                            yazı = "Anasayfaya dönmek için Enter'a basın"
+                            yazı2 = ""
+                            font_hata = pg.Color("White")
+                            direnctoplam(r1,r2,r3)
+                          else:
+                            yazı = "1-2-3 değerlerinden birini girin"
+                            text_box_state = 2	
