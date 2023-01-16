@@ -185,3 +185,19 @@ def textbox():
                         text = text[:-1]
                     else:
                           text += event.unicode	
+	screen.fill((52, 78, 91))
+        # Render the current text.
+        txt_surface = font2.render(text, True, color)
+        # Resize the box if the text is too long.
+        width = max(200, txt_surface.get_width()+10)
+        input_box.w = width
+        # Blit the text.
+        screen.blit(txt_surface, (input_box.x+5, input_box.y+5))
+        text_ayarlar(yazı, font, font_hata, 500, 310)
+        text_ayarlar(yazı2, font, font_hata, 500, 225)
+        # Blit the input_box rect.
+        pg.draw.rect(screen, color, input_box, 3)
+       
+        pg.display.flip()
+        clock.tick(30)
+
