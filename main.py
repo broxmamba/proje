@@ -200,4 +200,26 @@ def textbox():
        
         pg.display.flip()
         clock.tick(30)
+	
+#game loop
+run = True
+while run:
 
+  screen.fill((52, 78, 0))#arkaplan
+
+  #check if game is paused
+  if game_paused == False:
+    #check menu state
+    if menu_state == "main":
+      #draw pause screen buttons
+      if resume_button.draw(screen):
+        game_paused = True
+      if options_button.draw(screen):
+        menu_state = "options"
+
+      if quit_button.draw(screen):
+        run = False
+    #check if the options menu is open
+    if menu_state == "options":
+      textbox()
+      run = True
