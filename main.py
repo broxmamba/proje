@@ -223,3 +223,23 @@ while run:
     if menu_state == "options":
       textbox()
       run = True
+	if quit_button.draw(screen):
+
+        run= False
+  else:
+    
+    dikdörtgen(400,300,30,50)
+    dikdörtgen(400,325,30,375)
+    screen.blit(direnc,(30,375))
+    screen.blit(devre_img,(75,50))
+    
+    draw_text("Durdurmak için SPACE'e basın", font, TEXT_COL, 5, 5)
+    draw_text("Voltaj: {} volt ".format(volt), fontD,D_COL,40,175)
+    draw_text("R1: {} Ohm ".format(r1), fontD,D_COL,40,100)
+    draw_text("R2: {} Ohm ".format(r2), fontD,D_COL,40,125)
+    draw_text("R3: {} Ohm ".format(r3), fontD,D_COL,40,150)
+    draw_text("Akım: {} Amper ".format(round(volt/rtoplam,2)), fontd,D_COL,40,250)
+    draw_text("Rtoplam: {} Ohm ".format(rtoplam), fontd,D_COL,40,300)
+    
+    
+  
