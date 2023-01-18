@@ -1,15 +1,16 @@
+import pygame as pygame
 import pygame as pg
-pg.init()
+pygame.init()
 
-#SİMİLASYON PENÇERESİNİN YAPILMASI
-SCREEN_WIDTH = 1200
-SCREEN_HEIGHT = 750
+#oyun ekrani yaratma
+SCREEN_WIDTH = 1080
+SCREEN_HEIGHT = 720
 
 screen = pg.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 pg.display.set_caption("Ohm kanunu")
 
 
-#SİMİLASYON DEĞİŞKENLERİ
+#simulasyon degiskenleri
 game_paused = False
 menu_state = "main"
 volt = 10
@@ -20,31 +21,33 @@ rtoplam = 5.40
 Circuit_State= 1
 Akımson = 1.85
 
-#YAZI FONTUNUN TANIMLANMASI
-font_15 = pg.font.SysFont("arialblack", 15)
-font_25 = pg.font.SysFont("arialblack", 25)
-font_20 = pg.font.SysFont("arial",20)
+#font ayarlama
+font = pg.font.SysFont("arialblack", 15)
+fontd = pg.font.SysFont("arialblack", 25)
+fontD = pg.font.SysFont("arial",20)
+#renk ayarlama
+TEXT_COL = (255, 255, 255)
+D_COL = (0,0,0)
 
-#RENKLERİN TANIMLANMASI
-WHITE_RGB = (255, 255, 255)
-BLACK_RGB= (0,0,0)
-
-#DİRENÇ RESİMLERİNİN YÜKLENMESİ
 direnc = pg.image.load("Direnc.png")
 devre_img1 = pg.image.load("PS.png").convert_alpha()
 devre_img2 = pg.image.load("paralel.png").convert_alpha()
 devre_img3 = pg.image.load("seri.png").convert_alpha()
 devre_img = devre_img1
+#buton resimlerini yükleme
 
-#BUTON RESİMLERİNİN YÜKLENMESİ
-def dikdörtgen(genislik,yukseklik,x,y): #Dikdörtgen oluşturur
+def dikdörtgen(genislik,yukseklik,x,y):
+  #Dikdörtgen oluşturur
 
   dikdörtgen_nesnesi = pg.Surface((genislik,yukseklik))
-  dikdörtgen_nesnesi.fill((240, 248, 255))
+  dikdörtgen_nesnesi.fill((240, 245, 255))
   dikdörtgen_nesnesi_konumu = (x, y)
   
   screen.blit(dikdörtgen_nesnesi, dikdörtgen_nesnesi_konumu)
+
   
+  
+
 class Button():
 	def __init__(self, x, y, image, oran):
 		width = image.get_width()
@@ -56,10 +59,10 @@ class Button():
 
 	def draw(self, surface):
 		action = False
-		#get mouse position
+		#mouse konumunu ayarlama
 		pos = pg.mouse.get_pos()
 
-		#check mouseover and clicked conditions
+		#mouse ve tiklamayi kontrol etme
 		if self.rect.collidepoint(pos):
 			if pg.mouse.get_pressed()[0] == 1 and self.clicked == False:
 				self.clicked = True
@@ -68,18 +71,19 @@ class Button():
 		if pg.mouse.get_pressed()[0] == 0:
 			self.clicked = False
 
-		#draw button on screen
+		#ekranda buton cizme
 		surface.blit(self.image, (self.rect.x, self.rect.y))
 
 		return action 
 resume_img = pg.image.load("button_resume.png").convert_alpha()
 options_img = pg.image.load("button_options.png").convert_alpha()
 quit_img = pg.image.load("button_quit.png").convert_alpha()
-  
-#Buton
-resume_button = Button(500, 125, resume_img, 1)
-options_button = Button(500, 250, options_img, 1)
-quit_button = Button(500, 375, quit_img, 1)
+
+
+#buton ornekleri yaratma
+resume_button = Button(440, 125, resume_img, 1)
+options_button = Button(440, 250, options_img, 1)
+quit_button = Button(440, 375, quit_img, 1)
 def draw_text(text, font, text_col, x, y):
   img = font.render(text, True, text_col)
   screen.blit(img, (x, y))
@@ -92,30 +96,26 @@ def direnctoplam(R1,R2,R3):
   elif Circuit_State == 3:
     rtoplam = (R1+R2+R3)
   else: rtoplam = ""
-		
-#Yazı kutularının yapılması		
+   
 def textbox():
-	
     global game_paused,menu_state,r1,r2,r3,Circuit_State,volt,devre_img
-    screen = pg.display.set_mode((1200, 750))
+    screen = pg.display.set_mode((1080, 720))
     font2 = pg.font.SysFont("arialblack", 25)
     clock = pg.time.Clock()
-    input_box = pg.Rect(500, 250, 140, 50)
+    input_box = pg.Rect(440, 250, 140, 50)
     color_inactive = pg.Color('lightskyblue3')
-    color_active = pg.Color('dodgerblue2')
+    color_active = pg.Color('White')
     color = color_inactive
     active = False
     text = ''
     done = False
     yazı = ""
     yazı2 = "Voltaj değerini giriniz"
-    font_hata = pg.Color("Red")
+    font_hata = pg.Color("White")
     text_box_state = int(6)
-
-
-   def text_ayarlar(text, font, text_col, x, y):
+    def text_ayarlar(text, font, text_col, x, y):
         img = font.render(text, True, text_col)
-        screen.blit(img, (x, y))
+        screen.blit(img, (450, y))
     while not done:
         for event in pg.event.get():
             if event.type == pg.MOUSEBUTTONDOWN:
@@ -128,6 +128,7 @@ def textbox():
                 # Change the current color of the input box.
                 color = color_active if active else color_inactive
             if event.type == pg.KEYDOWN:
+              
                 if active:
                     if event.key == pg.K_RETURN:
                       try:
@@ -153,7 +154,8 @@ def textbox():
                           r3 = sayı
                           text =''
                           print (r3)
-			elif text_box_state == 1:
+                          
+                        elif text_box_state == 1:
                           Circuit_State = sayı
                           if 0< Circuit_State < 4:
                             print(Circuit_State)
@@ -163,8 +165,10 @@ def textbox():
                             direnctoplam(r1,r2,r3)
                           else:
                             yazı = "1-2-3 değerlerinden birini girin"
-                            text_box_state = 2	
-			if text_box_state == 0:
+                            text_box_state = 2
+
+                        
+                        if text_box_state == 0:
                           
                           game_paused= True
                           done = True
@@ -184,8 +188,9 @@ def textbox():
                     elif event.key == pg.K_BACKSPACE:
                         text = text[:-1]
                     else:
-                          text += event.unicode	
-	screen.fill((52, 78, 91))
+                          text += event.unicode
+            arkaa_plan = pygame.image.load("bulb.png")
+            screen.blit(arkaa_plan, (0,0))
         # Render the current text.
         txt_surface = font2.render(text, True, color)
         # Resize the box if the text is too long.
@@ -193,21 +198,22 @@ def textbox():
         input_box.w = width
         # Blit the text.
         screen.blit(txt_surface, (input_box.x+5, input_box.y+5))
-        text_ayarlar(yazı, font, font_hata, 500, 310)
-        text_ayarlar(yazı2, font, font_hata, 500, 225)
+        text_ayarlar(yazı, font, font_hata, 400, 310)
+        text_ayarlar(yazı2, font, font_hata, 400, 225)
         # Blit the input_box rect.
         pg.draw.rect(screen, color, input_box, 3)
        
         pg.display.flip()
         clock.tick(30)
-	
-#game loop
+#oyun dongusu
 run = True
 while run:
 
-  screen.fill((52, 78, 0))#arkaplan
+  arka_plan = pygame.image.load("wallpaperr.png")
 
-  #check if game is paused
+  screen.blit(arka_plan, (0,0)) #arkaplan
+
+  #oyun durdurma kontrolleri
   if game_paused == False:
     #check menu state
     if menu_state == "main":
@@ -219,28 +225,32 @@ while run:
 
       if quit_button.draw(screen):
         run = False
-    #check if the options menu is open
+    #ayarlar menusu kontrolleri
     if menu_state == "options":
       textbox()
       run = True
-	if quit_button.draw(screen):
+      
+      if quit_button.draw(screen):
 
         run= False
   else:
     
     dikdörtgen(400,300,30,50)
-    dikdörtgen(400,325,30,375)
-    screen.blit(direnc,(30,375))
-    screen.blit(devre_img,(75,50))
-    
+    dikdörtgen(400,300,30,350)
+    screen.blit(devre_img,(0,50))
+    screen.blit(direnc,(0,275))
+     
     draw_text("Durdurmak için SPACE'e basın", font, TEXT_COL, 5, 5)
     draw_text("Voltaj: {} volt ".format(volt), fontD,D_COL,40,175)
     draw_text("R1: {} Ohm ".format(r1), fontD,D_COL,40,100)
     draw_text("R2: {} Ohm ".format(r2), fontD,D_COL,40,125)
     draw_text("R3: {} Ohm ".format(r3), fontD,D_COL,40,150)
-    draw_text("Akım: {} Amper ".format(round(volt/rtoplam,2)), fontd,D_COL,40,250)
-    draw_text("Rtoplam: {} Ohm ".format(rtoplam), fontd,D_COL,40,300)
-     #event handler
+    draw_text("Akım: {} Amper ".format(round(volt/rtoplam,2)), fontd,D_COL,40,200)
+    draw_text("Rtoplam: {} Ohm ".format(rtoplam), fontd,D_COL,40,250)
+    
+    
+  
+  #etkinlik duzeni
   for event in pg.event.get():
     if event.type == pg.KEYDOWN:
       if event.key == pg.K_SPACE:
@@ -251,5 +261,3 @@ while run:
   pg.display.update()
 
 pg.quit()
-    
-  
