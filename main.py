@@ -34,7 +34,7 @@ devre_img1 = pg.image.load("PS.png").convert_alpha()
 devre_img2 = pg.image.load("paralel.png").convert_alpha()
 devre_img3 = pg.image.load("seri.png").convert_alpha()
 devre_img = devre_img1
-#buton resimlerini yükleme
+
 
 def dikdörtgen(genislik,yukseklik,x,y):
   #Dikdörtgen oluşturur
@@ -46,7 +46,7 @@ def dikdörtgen(genislik,yukseklik,x,y):
   screen.blit(dikdörtgen_nesnesi, dikdörtgen_nesnesi_konumu)
 
   
-  
+  #buton resimlerini yükleme
 
 class Button():
 	def __init__(self, x, y, image, oran):
