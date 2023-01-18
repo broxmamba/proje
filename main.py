@@ -240,6 +240,16 @@ while run:
     draw_text("R3: {} Ohm ".format(r3), fontD,D_COL,40,150)
     draw_text("Akım: {} Amper ".format(round(volt/rtoplam,2)), fontd,D_COL,40,250)
     draw_text("Rtoplam: {} Ohm ".format(rtoplam), fontd,D_COL,40,300)
-    
+     #event handler
+  for event in pg.event.get():
+    if event.type == pg.KEYDOWN:
+      if event.key == pg.K_SPACE:
+        game_paused = False
+    if event.type == pg.QUIT:
+      run = False
+
+  pg.display.update()
+
+pg.quit()
     
   
